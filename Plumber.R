@@ -25,7 +25,7 @@ function(scopes){
                        project_id, 
                        '/topics')
   
-  request <- gargle::request_build(method = 'GET', path = requestUrl, token = token)
+  request <- gargle::request_build(method = 'GET', path = requestUrl, token = httr::config(token = token))
   
   response <- gargle::request_make(request)
   
@@ -56,7 +56,7 @@ function(scopes){
                        project_id, 
                        '/topics')
   
-  request <- gargle::request_build(method = 'GET', path = requestUrl, token = token)
+  request <- gargle::request_build(method = 'GET', path = requestUrl, token = httr::config(token = token))
   
   response <- gargle::request_make(request)
   
