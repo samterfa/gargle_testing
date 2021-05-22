@@ -26,7 +26,7 @@ credentials_gce2 <- function(scopes = "https://www.googleapis.com/auth/cloud-pla
     scope = scopes,
     service_account = service_account
   )
-  token <- GceToken$new(
+  token <- gargle:::GceToken$new(
     credentials = gargle:::gce_token$access_token,
     params = params,
     # The underlying Token2 class appears to *require* an endpoint and an app,
