@@ -10,7 +10,7 @@ if(Sys.getenv('PORT') == '') Sys.setenv(PORT = 8000)
 function(scopes){
   
   scopes <- strsplit(scopes, ',')[[1]]
-  print(scopes)
+
   token <- gargle::credentials_gce(scopes = scopes)
   
   return(is.null(token))
@@ -24,4 +24,15 @@ function(){
   token <- gargle::credentials_gce()
   
   return(gargle::token_email(token))
+}
+
+#* @get /instancescopes
+#* @serializer text
+function(){
+  
+  token <- gargle::credentials_gce()
+  
+  scopes <- gargle:::get_instance_scopes(gargle::token_email(token))
+  
+  return(paste(result, collapse = ', '))
 }
