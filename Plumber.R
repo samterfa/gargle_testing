@@ -29,9 +29,9 @@ function(scopes){
                                    path = paste0('v1/projects/', project_id, '/topics'), 
                                    token = httr::config(token = token))
   
-  response <- gargle::request_make(request)
+  response <- jsonlite::fromJSON(gargle::request_make(request))$code
   
-  tokenWorksForPubSub <- httr::content(response)
+  tokenWorksForPubSub <- response$status_code < 300
   
   return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
 }
@@ -60,7 +60,7 @@ function(scopes){
   
   response <- gargle::request_make(request)
   
-  tokenWorksForPubSub <- httr::content(response)
+  tokenWorksForPubSub <- response$status_code < 300
   
   return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
 }
