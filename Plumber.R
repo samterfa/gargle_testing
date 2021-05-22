@@ -4,13 +4,17 @@ if(Sys.getenv('PORT') == '') Sys.setenv(PORT = 8000)
 #' @apiTitle Testing Gargle on GCP
 #' @apiDescription Testing Gargle on GCP
  
-#* @get /scopes
+#* @get /scopes2
 #* @param scopes Comma-separated list of scopes to check with credentials_gce
 #* @serializer text
 function(scopes){
   
+  source('credentials_gce2.R')
+  
+  assignInNamespace('credentials_gce', credentials_gce, ns = 'gargle')
+  
   scopes <- strsplit(scopes, ',')[[1]]
-
+  
   token <- gargle::credentials_gce(scopes = scopes)
   
   return(is.null(token))
