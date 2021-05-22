@@ -34,5 +34,5 @@ function(){
   
   scopes <- gargle:::get_instance_scopes(gargle::token_email(token))
   
-  return(paste(result, collapse = ', '))
+  return(paste(scopes, collapse = ', '))
 }
