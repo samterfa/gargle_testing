@@ -23,5 +23,5 @@ function(){
   
   token <- gargle::credentials_gce()
   
-  return(paste(names(token, collapse = ', ')))
+  return(paste(names(token), collapse = ', '))
 }
