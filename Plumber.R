@@ -19,7 +19,7 @@ function(scopes){
   
   tokenIsNull <- is.null(token)
   
-  project_id <- gargle:::gce_metadata_request('project/project-id') %>% httr::content() %>% rawToChar()
+  project_id <- rawToChar(httr::content(gargle:::gce_metadata_request('project/project-id')))
   print(project_id)
   requestUrl <- paste0('https://pubsub.googleapis.com/v1/projects/', 
                        project_id, 
@@ -46,7 +46,7 @@ function(scopes){
   
   tokenIsNull <- is.null(token)
   
-  project_id <- gargle:::gce_metadata_request('project/project-id') %>% httr::content() %>% rawToChar()
+  project_id <- rawToChar(httr::content(gargle:::gce_metadata_request('project/project-id')))
   print(project_id)
   requestUrl <- paste0('https://pubsub.googleapis.com/v1/projects/', 
                        project_id, 
