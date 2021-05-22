@@ -17,7 +17,17 @@ function(scopes){
   
   token <- gargle::credentials_gce(scopes = scopes)
   
-  return(is.null(token))
+  tokenIsNull <- is.null(token)
+  
+  project_id <- gargle:::gce_metadata_request('project/project-id') %>% httr::content() %>% rawToChar()
+  print(project_id)
+  requestUrl <- paste0('https://pubsub.googleapis.com/v1/projects/', 
+                       project_id, 
+                       '/topics')
+  
+  tokenWorksForPubSub <- httr::status_code(httr::GET(requestUrl)) < 300
+  
+  return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
 }
 
 
@@ -34,7 +44,17 @@ function(scopes){
   
   token <- gargle::credentials_gce(scopes = scopes)
   
-  return(is.null(token))
+  tokenIsNull <- is.null(token)
+  
+  project_id <- gargle:::gce_metadata_request('project/project-id') %>% httr::content() %>% rawToChar()
+  print(project_id)
+  requestUrl <- paste0('https://pubsub.googleapis.com/v1/projects/', 
+                       project_id, 
+                       '/topics')
+  
+  tokenWorksForPubSub <- httr::status_code(httr::GET(requestUrl)) < 300
+  
+  return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
 }
 
 #* @get /email
