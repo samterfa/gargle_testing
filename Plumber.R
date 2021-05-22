@@ -30,9 +30,10 @@ function(scopes){
                                    token = httr::config(token = token))
   
   response <- gargle::request_make(request)
+  print(response)
   
   tokenWorksForPubSub <- response$status_code < 300
-  
+ 
   return(paste(nonNullToken, tokenWorksForPubSub, collapse = ', '))
 }
 
@@ -59,6 +60,7 @@ function(scopes){
                                    token = httr::config(token = token))
   
   response <- gargle::request_make(request)
+  print(response)
   
   tokenWorksForPubSub <- response$status_code < 300
   
