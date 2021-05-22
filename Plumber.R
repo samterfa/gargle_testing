@@ -25,7 +25,9 @@ function(scopes){
                        project_id, 
                        '/topics')
   
-  response <- gargle::request_build(method = 'GET', path = requestUrl, token = token)
+  request <- gargle::request_build(method = 'GET', path = requestUrl, token = token)
+  
+  response <- gargle::request_make(request)
   
   tokenWorksForPubSub <- httr::content(response)
   
@@ -54,7 +56,9 @@ function(scopes){
                        project_id, 
                        '/topics')
   
-  response <- gargle::request_build(method = 'GET', path = requestUrl, token = token)
+  request <- gargle::request_build(method = 'GET', path = requestUrl, token = token)
+  
+  response <- gargle::request_make(request)
   
   tokenWorksForPubSub <- httr::content(response)
   
