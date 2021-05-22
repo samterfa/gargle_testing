@@ -17,7 +17,7 @@ function(scopes){
   
   token <- gargle::credentials_gce(scopes = scopes)
   
-  tokenIsNull <- is.null(token)
+  nonNullToken <- !is.null(token)
   
   project_id <- rawToChar(httr::content(gargle:::gce_metadata_request('project/project-id')))
   
@@ -29,11 +29,11 @@ function(scopes){
                                    path = paste0('v1/projects/', project_id, '/topics'), 
                                    token = httr::config(token = token))
   
-  response <- jsonlite::fromJSON(gargle::request_make(request))$code
+  response <- gargle::request_make(request)
   
   tokenWorksForPubSub <- response$status_code < 300
   
-  return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
+  return(paste(nonNullToken, tokenWorksForPubSub, collapse = ', '))
 }
 
 
@@ -50,7 +50,7 @@ function(scopes){
   
   token <- gargle::credentials_gce(scopes = scopes)
   
-  tokenIsNull <- is.null(token)
+  nonNullToken <- !is.null(token)
   
   project_id <- rawToChar(httr::content(gargle:::gce_metadata_request('project/project-id')))
   
@@ -62,7 +62,7 @@ function(scopes){
   
   tokenWorksForPubSub <- response$status_code < 300
   
-  return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
+  return(paste(nonNullToken, tokenWorksForPubSub, collapse = ', '))
 }
 
 #* @get /email
