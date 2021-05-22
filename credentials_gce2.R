@@ -1,7 +1,7 @@
 credentials_gce <- function(scopes = "https://www.googleapis.com/auth/cloud-platform",
                             service_account = "default", ...) {
   
-  print('Using updated credentials_gce function.')
+  print('Using OLD credentials_gce function.')
   
   gargle:::gargle_debug("trying {.fun credentials_gce}")
   if (!gargle:::detect_gce() || is.null(scopes)) {
@@ -46,7 +46,7 @@ credentials_gce <- function(scopes = "https://www.googleapis.com/auth/cloud-plat
 credentials_gce2 <- function(scopes = "https://www.googleapis.com/auth/cloud-platform",
                              service_account = "default", ...) {
   
-  print('Using updated credentials_gce function.')
+  print('Using UPDATED credentials_gce function.')
   
   gargle:::gargle_debug("trying {.fun credentials_gce}")
   if (!gargle:::detect_gce() || is.null(scopes)) {
