@@ -25,7 +25,7 @@ function(scopes){
                        project_id, 
                        '/topics')
   
-  tokenWorksForPubSub <- httr::status_code(httr::GET(requestUrl)) < 300
+  tokenWorksForPubSub <- httr::GET(requestUrl)
   
   return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
 }
@@ -52,7 +52,7 @@ function(scopes){
                        project_id, 
                        '/topics')
   
-  tokenWorksForPubSub <- httr::status_code(httr::GET(requestUrl)) < 300
+  tokenWorksForPubSub <-httr::GET(requestUrl)
   
   return(paste(tokenIsNull, tokenWorksForPubSub, collapse = ', '))
 }
