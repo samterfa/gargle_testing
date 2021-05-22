@@ -22,6 +22,6 @@ function(scopes){
 function(){
   
   token <- gargle::credentials_gce()
-  print(token)
-  return(is.null(token))
+  
+  return(paste(names(token, collapse = ', ')))
 }
