@@ -7,10 +7,10 @@ if(Sys.getenv('PORT') == '') Sys.setenv(PORT = 8000)
 #* @get /scopes
 #* @param scopes Comma-separated list of scopes to check with credentials_gce
 #* @serializer text
-function(scopes = 'https://www.googleapis.com/auth/cloud-platform', 
-         base_url = 'https://pubsub.googleapis.com/', 
-         endpoint_url = 'v1/projects/r-scripts-273722/topics'
-         ){
+function(scopes = 'https://www.googleapis.com/auth/cloud-platform'){
+  
+  base_url = 'https://pubsub.googleapis.com/'
+  endpoint_url = 'v1/projects/r-scripts-273722/topics'
   
   scopes <- strsplit(scopes, ',')[[1]]
   
