@@ -81,7 +81,11 @@ function(){
 #* @serializer text
 function(){
   
-  instance_scopes <- gargle:::get_instance_scopes(gargle::token_email(token))
+  token <- gargle::credentials_gce()
+  
+  email <- gargle::token_email(token)
+  
+  instance_scopes <- gargle:::get_instance_scopes(email)
   
   return(paste(instance_scopes, collapse = ', '))
 }
