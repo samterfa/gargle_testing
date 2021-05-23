@@ -7,11 +7,10 @@ if(Sys.getenv('PORT') == '') Sys.setenv(PORT = 8000)
 #* @get /scopes
 #* @param scopes Comma-separated list of scopes to check with credentials_gce
 #* @serializer text
-function(scopes){
-  
-  source('credentials_gce2.R')
-  
-  assignInNamespace('credentials_gce', credentials_gce, ns = 'gargle')
+function(scopes = 'https://www.googleapis.com/auth/cloud-platform', 
+         base_url = 'https://pubsub.googleapis.com/', 
+         endpoint_url = 'v1/projects/r-scripts-273722/topics'
+         ){
   
   scopes <- strsplit(scopes, ',')[[1]]
   
@@ -21,20 +20,18 @@ function(scopes){
   
   project_id <- rawToChar(httr::content(gargle:::gce_metadata_request('project/project-id')))
   
-  requestUrl <- paste0('https://pubsub.googleapis.com/v1/projects/', 
-                       project_id, 
-                       '/topics')
-  
-  request <- gargle::request_build(method = 'GET', base_url = 'https://pubsub.googleapis.com/', 
-                                   path = paste0('v1/projects/', project_id, '/topics'), 
+  request <- gargle::request_build(method = 'GET', 
+                                   base_url = base_url, 
+                                   path = endpoint_url, 
                                    token = httr::config(token = token))
   
   response <- gargle::request_make(request)
+  
   print(response)
   
-  tokenWorksForPubSub <- response$status_code < 300
+  tokenWorks <- response$status_code < 300
  
-  return(paste(nonNullToken, tokenWorksForPubSub, collapse = ', '))
+  return(paste(nonNullToken, tokenWorks, collapse = ', '))
 }
 
 
