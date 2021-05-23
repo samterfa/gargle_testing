@@ -68,11 +68,20 @@ function(scopes){
 }
 
 #* @get /email
-#* @param scopes Comma-separated list of scopes to check with credentials_gce
 #* @serializer text
 function(){
   
   token <- gargle::credentials_gce()
   
   return(gargle::token_email(token))
+}
+
+
+#* @get /instancescopes
+#* @serializer text
+function(){
+  
+  instance_scopes <- gargle:::get_instance_scopes(gargle::token_email(token))
+  
+  return(paste(instance_scopes, collapse = ', '))
 }
